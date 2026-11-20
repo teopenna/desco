@@ -4,6 +4,7 @@ ARG TZ
 ENV TZ="$TZ"
 
 ARG CLAUDE_CODE_VERSION=latest
+ARG CODEX_VERSION=latest
 
 # Install basic development tools and iptables/ipset
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -70,9 +71,10 @@ ENV SHELL=/bin/zsh
 ENV EDITOR=nano
 ENV VISUAL=nano
 
-# Default powerline10k theme
+# Use the Oh My Zsh cloud theme
 ARG ZSH_IN_DOCKER_VERSION=1.2.0
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v${ZSH_IN_DOCKER_VERSION}/zsh-in-docker.sh)" -- \
+  -t cloud \
   -p git \
   -p fzf \
   -a "source /usr/share/doc/fzf/examples/key-bindings.zsh" \
@@ -84,7 +86,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
 
 # Install Codex
-RUN npm install -g @openai/codex
+RUN npm install -g @openai/codex@${CODEX_VERSION}
 
 # Copy and set up firewall script
 COPY init-firewall.sh /usr/local/bin/

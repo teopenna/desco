@@ -18,7 +18,7 @@ gh auth setup-git   # git push/pull over HTTPS using GH_TOKEN
 if ! grep -q '# agent-wrappers' ~/.zshrc 2>/dev/null; then
     cat >> ~/.zshrc <<'EOF'
     # agent-wrappers
-    ccl() { AGENT_NAME=claude GIT_AUTHOR_NAME="matteo-agent (claude)" GIT_COMMITTER_NAME="matteo-agent (claude)" claude "$@"; }
-    cx()  { AGENT_NAME=codex  GIT_AUTHOR_NAME="matteo-agent (codex)"  GIT_COMMITTER_NAME="matteo-agent (codex)"  codex  "$@"; }
+    ccl() { AGENT_NAME=claude GIT_AUTHOR_NAME="teopenna-agent (claude)" GIT_COMMITTER_NAME="teopenna-agent (claude)" claude "$@"; }
+    cx()  { AGENT_NAME=codex  GIT_AUTHOR_NAME="teopenna-agent (codex)"  GIT_COMMITTER_NAME="teopenna-agent (codex)"  codex --sandbox danger-full-access --ask-for-approval on-request "$@"; }
 EOF
 fi

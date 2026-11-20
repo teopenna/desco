@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+AGENT_LOGIN="teopenna-agent"
+AGENT_ID="358021140"   # from https://api.github.com/users/teopenna-agent
+
+install -m 700 -d ~/.ssh
+install -m 600 /run/agent-secrets/agent_ed25519 ~/.ssh/agent_ed25519
+
+git config --global user.name  "$AGENT_LOGIN"
+git config --global user.email "${AGENT_ID}+${AGENT_LOGIN}@users.noreply.github.com"
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/agent_ed25519
+git config --global commit.gpgsign true
+
+gh auth setup-git   # git push/pull over HTTPS using GH_TOKEN

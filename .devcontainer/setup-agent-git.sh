@@ -13,3 +13,12 @@ git config --global user.signingkey ~/.ssh/agent_ed25519
 git config --global commit.gpgsign true
 
 gh auth setup-git   # git push/pull over HTTPS using GH_TOKEN
+
+# Per-agent wrappers (added only once)
+if ! grep -q '# agent-wrappers' ~/.zshrc 2>/dev/null; then
+    cat >> ~/.zshrc <<'EOF'
+    # agent-wrappers
+    ccl() { AGENT_NAME=claude GIT_AUTHOR_NAME="matteo-agent (claude)" GIT_COMMITTER_NAME="matteo-agent (claude)" claude "$@"; }
+    cx()  { AGENT_NAME=codex  GIT_AUTHOR_NAME="matteo-agent (codex)"  GIT_COMMITTER_NAME="matteo-agent (codex)"  codex  "$@"; }
+EOF
+fi

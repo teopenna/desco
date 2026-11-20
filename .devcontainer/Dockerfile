@@ -42,9 +42,11 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
 # Set `DEVCONTAINER` environment variable to help with orientation
 ENV DEVCONTAINER=true
 
-# Create workspace and config directories and set permissions
+# Create workspace and config directories and set permissions for Claude and Codex
 RUN mkdir -p /workspace /home/node/.claude && \
   chown -R node:node /workspace /home/node/.claude
+RUN mkdir -p /home/node/.codex && \
+  chown -R node:node /home/node/.codex
 
 WORKDIR /workspace
 
@@ -81,6 +83,8 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 # Install Claude
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
 
+# Install Codex
+RUN npm install -g @openai/codex
 
 # Copy and set up firewall script
 COPY init-firewall.sh /usr/local/bin/

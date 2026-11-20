@@ -46,11 +46,13 @@
   "mounts": [
     "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
     "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume",
-    "source=${localEnv:HOME}/.agent-secrets/agent_ed25519,target=/run/agent-secrets/agent_ed25519,type=bind,readonly"
+    "source=${localEnv:HOME}/.agent-secrets/agent_ed25519,target=/run/agent-secrets/agent_ed25519,type=bind,readonly",
+    "source=codex-config-${devcontainerId},target=/home/node/.codex,type=volume"
   ],
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",
     "CLAUDE_CONFIG_DIR": "/home/node/.claude",
+    "CODEX_HOME": "/home/node/.codex",
     "POWERLEVEL9K_DISABLE_GITSTATUS": "true"
   },
   "remoteEnv": {

@@ -6,4 +6,4 @@ case "$(git var GIT_AUTHOR_IDENT)" in
 esac
 
 git interpret-trailers --in-place --if-exists addIfDifferent \
-  --trailer "Co-authored-by: Matteo <YOUR_ID+YOUR_LOGIN@users.noreply.github.com>" "$1"
+  --trailer "Co-authored-by: Matteo <15275429+teopenna@users.noreply.github.com>" "$1"

@@ -1,0 +1,9 @@
+#!/bin/sh
+# Adds the human co-author to commits made by the agent account.
+case "$(git var GIT_AUTHOR_IDENT)" in
+  *+teopenna-agent@users.noreply.github.com*) ;;
+  *) exit 0 ;;
+esac
+
+git interpret-trailers --in-place --if-exists addIfDifferent \
+  --trailer "Co-authored-by: Matteo <YOUR_ID+YOUR_LOGIN@users.noreply.github.com>" "$1"

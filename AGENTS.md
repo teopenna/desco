@@ -17,7 +17,7 @@
 
 ### Pull requests
 
-- Open PRs with `gh pr create --draft --label agent --reviewer <your-github-handle>`.
+- Open PRs with `gh pr create --draft --label agent --reviewer @teopenna`.
 - Write the body following `.github/pull_request_template.md` and fill in every section;
   pass it with `--body-file`. Write "None" rather than deleting a section.
 - Put `Closes #<issue>` in the body when the PR fully resolves the issue.
